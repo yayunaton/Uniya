@@ -50,12 +50,6 @@ module Gameplay = struct
   (** [new_player n] creates a new player {name: n; rugs: 5; coins: 30}*)
   let new_player (n : string) : player =
     Some { name = n; rug_num = 15; coins = 30 }
-
-  (** *)
-  let for_loop init start stop step f = 
-    let rec iterate i x =
-      if i > stop then x else iterate (i + step) (f i x)
-    in iterate start init
   
   (** *)
   let new_board (size : int) =
