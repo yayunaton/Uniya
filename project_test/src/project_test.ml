@@ -68,6 +68,10 @@ module Gameplay = struct
     match cute_unicorn.unicorn_position with
     | None -> false
     | Some a -> List.mem a.owner playerlist
+
+  let pay (cute_unicorn : unicorn) (playerlist : player list) =
+
+  let receive (cute_unicorn : unicorn) (playerlist : player list) =
   
   (*** Game Play Single Step*)
 
