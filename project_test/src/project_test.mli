@@ -1,5 +1,1 @@
-type player
-(** the type of player*)
-
-type board
-(** the board where all the events happens on*)
+(** This is an empty Interface that is left for later work*)
