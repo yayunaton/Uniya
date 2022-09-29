@@ -13,12 +13,17 @@ module Gameplay = struct
   type rugs = { owner : player }
   (** the type of the [rug]*)
 
+  type rug_status =
+  | None
+  | Some of rugs
+
   (*** Board Type Preset *)
 
-  type grid =
-    | None
-    | Some of rugs
-        (** the type [grid] of a 1*1 area on the board, which is the basic element*)
+  type grid = {
+    grid_position : int * int;
+    grid_rug : rug_status
+  }
+  (** the type [grid] of a 1*1 area on the board, which is the basic element*)
 
   type board = grid array array
   (** the type of the [board], which is a matrix of type [int array array]
@@ -46,11 +51,29 @@ module Gameplay = struct
   let new_player (n : string) : player =
     Some { name = n; rug_num = 15; coins = 30 }
 
+  (** *)
+  let for_loop init start stop step f = 
+    let rec iterate i x =
+      if i > stop then x else iterate (i + step) (f i x)
+    in iterate start init
+  
+  (** *)
+  let new_board (size : int) =
+    Array.make_matrix (2 * size) (2 * size) 
+      ( {grid_position = (0,0); grid_rug = None ;} : grid )
+
+  (** *)
+  let set_coordinate (x_cor : int) (y_cor : int) (grid : grid) =
+    {grid with grid_position = (x_cor, y_cor)}
+  
+  (** *)
+  let set_all_coordinate (b : board) =
+    
   (** [game_init cute_unicorn size] initialize the game by
       Creating a unicorn that defaultly faced Front
       Throwing that unicorn to a random place on the board*)
   let game_init (cute_unicorn : unicorn) (size : int) : unicorn =
-    let big_board = Array.make_matrix (2 * size) (2 * size) None in
+    let big_board = new_board size in
     {
       unicorn_direction = Front;
       unicorn_position =
@@ -77,10 +100,23 @@ module Gameplay = struct
 
   let roll_die : int =  
 
-  let determine_direction : direction =
+  let determine_direction : direction = 
 
-  let single_step (cute_unicorn : unicorn) (current_player : player) : unicorn =
-    {unicorn_direction = ; univorn_position = ; player_in_charge = ;}
+  let singular_line_movement (position : int * int) (steps : int)
+
+  let single_step (cute_unicorn : unicorn) (current_player : player)
+  (roll_die_num : int) (determined_direction : direction) : unicorn =
+    match determined_direction with
+    | Front { cute_unicorn with 
+              unicorn_direction = determined_direction;
+              unicorn_position = 
+                singular_line_movement unicorn_position roll_die_num; }
+    | Back
+    | Left
+    | Right
+    {unicorn_direction = ;
+     univorn_position = ;
+      player_in_charge = ;}
 
   
 end
